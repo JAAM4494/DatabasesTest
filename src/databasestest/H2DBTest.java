@@ -10,9 +10,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.h2.tools.Server;
 
 /**
  * Clase encargada del manejo y testing del motor de base de datos H2DB.
+ *
  * @author jaam
  * @version 2.0
  */
@@ -22,24 +26,23 @@ public class H2DBTest {
     private final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
     private final String DB_USER = "";
     private final String DB_PASSWORD = "";
-    
+
     private Connection connection;
     private Statement stmnt;
-    
+
     /**
      * Constructor de los objetos H2DBTest.
      */
-    public H2DBTest()
-    {
-        
+    public H2DBTest() {
+
     }
-    
+
     /**
      * Permite ejecutar una sentencia SQL.
+     *
      * @param pSQL Sentencia SQL para ser ejecutada.
      */
-    public void execute(String pSQL)
-    {
+    public void execute(String pSQL) {
         try {
             stmnt.execute(pSQL);
             connection.commit();
@@ -47,33 +50,32 @@ public class H2DBTest {
             System.out.println("Exception Message: " + ex.getLocalizedMessage());
         }
     }
-    
+
     /**
      * Permite realizar una consulta SQL.
+     *
      * @param pSQL Sentencia de la consulta.
      * @return Retorna un objeto ResultSet con los resultados de la consulta.
      * @see ResultSet
      */
-    public ResultSet executeQuery(String pSQL)
-    {
+    public ResultSet executeQuery(String pSQL) {
         ResultSet outRS = null;
-        
+
         try {
             outRS = stmnt.executeQuery(pSQL);
             connection.commit();
         } catch (SQLException ex) {
             System.out.println("Exception Message: " + ex.getLocalizedMessage());
         }
-        
+
         return outRS;
     }
-    
+
     /**
      * Permite inicializar la conexión con una base de datos en memoria
      * utilizando H2DB.
      */
-    public void initH2IMDB()
-    {
+    public void initH2IMDB() {
         try {
             connection = getDBConnection();
             connection.setAutoCommit(false);
@@ -82,12 +84,11 @@ public class H2DBTest {
             System.out.println("Exception Message: " + ex.getLocalizedMessage());
         }
     }
-    
+
     /**
      * Cierra la conexion con una base de datos creada.
      */
-    public void closeH2IMDB()
-    {
+    public void closeH2IMDB() {
         try {
             stmnt.close();
             connection.commit();
@@ -111,5 +112,18 @@ public class H2DBTest {
             System.out.println("Exception Message: " + ex.getLocalizedMessage());
         }
         return dbConnection;
+    }
+
+    /**
+     * Permite acceder a la base de datos mediante el browser.
+     */
+    public void openServerModeInBrowser() {
+        try {
+            Server server = Server.createTcpServer().start();
+            System.out.println("Server started and connection is open.");
+            System.out.println("URL: jdbc:h2:" + server.getURL() + "/mem:test");
+        } catch (SQLException ex) {
+            Logger.getLogger(H2DBTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
