@@ -20,21 +20,28 @@ import org.h2.tools.Server;
  * @author jaam
  * @version 2.0
  */
-public class H2DBTest {
+public class H2DB {
 
     private final String DB_DRIVER = "org.h2.Driver";
-    private final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private final String DB_USER = "";
-    private final String DB_PASSWORD = "";
-
     private Connection connection;
     private Statement stmnt;
+    //private final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
 
     /**
-     * Constructor de los objetos H2DBTest.
+     * Constructor de los objetos H2DB.
+     * @param pDBName Nombre de la base de datos.
+     * @param pUser Nombre de usuario.
+     * @param pPass Contrasena de usuario.
      */
-    public H2DBTest() {
-
+    public H2DB(String pDBName, String pUser,String pPass) {
+        try {
+            String dbConnection = "jdbc:h2:mem:"+pDBName+";DB_CLOSE_DELAY=-1";
+            connection = getDBConnection(dbConnection,pUser,pPass);
+            connection.setAutoCommit(false);
+            stmnt = connection.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("Exception Message: " + ex.getLocalizedMessage());
+        }
     }
 
     /**
@@ -72,20 +79,6 @@ public class H2DBTest {
     }
 
     /**
-     * Permite inicializar la conexión con una base de datos en memoria
-     * utilizando H2DB.
-     */
-    public void initH2IMDB() {
-        try {
-            connection = getDBConnection();
-            connection.setAutoCommit(false);
-            stmnt = connection.createStatement();
-        } catch (SQLException ex) {
-            System.out.println("Exception Message: " + ex.getLocalizedMessage());
-        }
-    }
-
-    /**
      * Cierra la conexion con una base de datos creada.
      */
     public void closeH2IMDB() {
@@ -98,7 +91,7 @@ public class H2DBTest {
         }
     }
 
-    private Connection getDBConnection() {
+    private Connection getDBConnection(String pDBConnection, String pUser, String pPass) {
         Connection dbConnection = null;
         try {
             Class.forName(DB_DRIVER);
@@ -106,7 +99,7 @@ public class H2DBTest {
             System.out.println(e.getMessage());
         }
         try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+            dbConnection = DriverManager.getConnection(pDBConnection, pUser, pPass);
             return dbConnection;
         } catch (SQLException ex) {
             System.out.println("Exception Message: " + ex.getLocalizedMessage());
@@ -116,14 +109,15 @@ public class H2DBTest {
 
     /**
      * Permite acceder a la base de datos mediante el browser.
+     * @param pDBName Nombre de la base de datos.
      */
-    public void openServerModeInBrowser() {
+    public void openServerModeInBrowser(String pDBName) {
         try {
             Server server = Server.createTcpServer().start();
             System.out.println("Server started and connection is open.");
-            System.out.println("URL: jdbc:h2:" + server.getURL() + "/mem:test");
+            System.out.println("URL: jdbc:h2:" + server.getURL() + "/mem:"+pDBName);
         } catch (SQLException ex) {
-            Logger.getLogger(H2DBTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(H2DB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

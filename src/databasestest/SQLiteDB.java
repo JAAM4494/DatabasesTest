@@ -227,12 +227,4 @@ public class SQLiteDB {
     }
     System.out.println("Operation done successfully");
   }
-      
-      
- 
-  
-  
-      
-      
-    
 }
