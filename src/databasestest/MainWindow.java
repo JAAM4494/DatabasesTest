@@ -10,7 +10,10 @@ package databasestest;
  * @author jaam
  */
 public class MainWindow extends javax.swing.JFrame {
-
+     private SQLiteDB newQuerySQLite;
+     private mySQLDB newQueryMySQL;
+     private H2DB newQueryH2DB;
+     
     /**
      * Creates new form MainWindow
      */
@@ -20,6 +23,90 @@ public class MainWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         this.jTextArea1.setEditable(false);
+        
+        newQuerySQLite = new SQLiteDB();
+        newQueryMySQL = new mySQLDB("TECDB", "root", "root");
+        newQueryH2DB = new H2DB("TECDB", "root", "root");
+        newQueryH2DB.execute("CREATE TABLE Personas(Nombre varchar(255),Cedula int primary key)");
+    }
+    
+    private void insertIntoPersonas (int option){
+        
+        String human ="human";
+        
+        int cedula=600;
+        
+        for (int i = 0; i < 1000; i++) {
+            String human2 = human + i;
+            cedula+=i;
+            if (option == 0) {
+                newQuerySQLite.insertInto("TECDB", "INSERT INTO Personas (Nombre, Cedula)\n" +
+"VALUES ("+human2 +","+Integer.toString(cedula)+");");
+            } 
+            else if (option == 1) {
+                newQueryMySQL.execute("INSERT INTO Personas (Nombre, Cedula)\n" +
+"VALUES ("+human2 +","+Integer.toString(cedula)+");");
+            } 
+            else {
+                newQueryH2DB.execute("INSERT INTO Personas (Nombre, Cedula)\n" +
+                "VALUES ("+human2 +","+Integer.toString(cedula)+");");
+
+            }
+        }
+    }
+    
+    
+    private void updatePersonas (int option){
+        
+        
+        String human ="human";
+        
+        int cedula=600;
+        
+        for (int i = 0; i < 1000; i++) {
+            String human2 = human + i;
+            String human3= human +i+i;
+            cedula+=i;
+            if (option == 0) {
+                newQuerySQLite.update("TECDB", "UPDATE Personas set Nombre ="+ human3+" where Nombre='"+human3+"';");
+            } 
+            else if (option == 1) {
+               newQueryMySQL.execute( "UPDATE Personas set Nombre ="+ human3+" where Nombre='"+human3+"';");
+
+            } 
+            else {
+                newQueryH2DB.execute( "UPDATE Personas set Nombre ="+ human3+" where Nombre='"+human3+"';");
+            }
+        }
+    }
+    
+     private void selectPersonas (int option) {
+        
+            if (option == 0) {
+                newQuerySQLite.select("TECDB", "SELECT * FROM Personas;");
+            } 
+            else if (option == 1) {
+               newQueryMySQL.execute( "SELECT * FROM Personas;");
+
+            } 
+            else {
+                newQueryMySQL.execute( "SELECT * FROM Personas; ");
+            }
+        
+    }
+     
+      private void deletePersonas (int option){
+        
+            if (option == 0) {
+                newQuerySQLite.delete("TECDB", "DELETE from Personas ;");
+            } 
+            else if (option == 1) {
+               newQueryMySQL.execute( "DELETE from Personas ;");
+
+            } 
+            else {
+                newQueryH2DB.execute( "DELETE from Personas ;");
+            }
     }
 
     /**
@@ -36,24 +123,24 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        InPerMySQL = new javax.swing.JButton();
+        SePerMySQL = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        UpPerMySQL = new javax.swing.JButton();
+        dePerMySQL = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        InPerSQLite = new javax.swing.JButton();
+        SePerSQLite = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        UpPerSQLite = new javax.swing.JButton();
+        dePerSQLite = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        InPerH2DB = new javax.swing.JButton();
+        SePerH2DB = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
+        UpPerH2DB = new javax.swing.JButton();
+        dePerH2DB = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -76,42 +163,107 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Ubuntu", 3, 18)); // NOI18N
         jLabel3.setText("H2DB");
 
-        jButton1.setText("jButton1");
+        InPerMySQL.setText("Insert Personas");
+        InPerMySQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InPerMySQLMouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        SePerMySQL.setText("select * Personas");
+        SePerMySQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SePerMySQLMouseClicked(evt);
+            }
+        });
+        SePerMySQL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SePerMySQLActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("jButton3");
 
-        jButton4.setText("jButton4");
+        UpPerMySQL.setText("update Personas");
+        UpPerMySQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpPerMySQLMouseClicked(evt);
+            }
+        });
 
-        jButton5.setText("jButton5");
+        dePerMySQL.setText("delete Personas");
+        dePerMySQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dePerMySQLMouseClicked(evt);
+            }
+        });
 
         jButton6.setText("jButton6");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 3, 18)); // NOI18N
         jLabel4.setText("Output:");
 
-        jButton7.setText("jButton7");
+        InPerSQLite.setText("Insert Personas");
+        InPerSQLite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InPerSQLiteMouseClicked(evt);
+            }
+        });
 
-        jButton8.setText("jButton8");
+        SePerSQLite.setText("select * Personas");
+        SePerSQLite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SePerSQLiteMouseClicked(evt);
+            }
+        });
 
         jButton9.setText("jButton9");
 
-        jButton10.setText("jButton10");
+        UpPerSQLite.setText("update Personas");
+        UpPerSQLite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpPerSQLiteMouseClicked(evt);
+            }
+        });
 
-        jButton11.setText("jButton11");
+        dePerSQLite.setText("delete Personas");
+        dePerSQLite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dePerSQLiteMouseClicked(evt);
+            }
+        });
 
         jButton12.setText("jButton12");
 
-        jButton13.setText("jButton13");
+        InPerH2DB.setText("Insert Personas");
+        InPerH2DB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InPerH2DBMouseClicked(evt);
+            }
+        });
 
-        jButton14.setText("jButton14");
+        SePerH2DB.setText("select * Personas");
+        SePerH2DB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SePerH2DBMouseClicked(evt);
+            }
+        });
 
         jButton15.setText("jButton15");
 
-        jButton16.setText("jButton16");
+        UpPerH2DB.setText("update Personas");
+        UpPerH2DB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpPerH2DBMouseClicked(evt);
+            }
+        });
 
-        jButton17.setText("jButton17");
+        dePerH2DB.setText("delete Personas");
+        dePerH2DB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dePerH2DBMouseClicked(evt);
+            }
+        });
 
         jButton18.setText("jButton18");
 
@@ -136,9 +288,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SePerH2DB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dePerH2DB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -149,24 +301,24 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(InPerSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SePerSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(dePerSQLite, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(UpPerSQLite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SePerMySQL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(InPerMySQL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addComponent(InPerH2DB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dePerMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UpPerMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UpPerH2DB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,7 +326,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                        .addComponent(labelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(249, 249, 249)
@@ -201,12 +353,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton4))
+                            .addComponent(InPerMySQL)
+                            .addComponent(UpPerMySQL))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton5))
+                            .addComponent(SePerMySQL)
+                            .addComponent(dePerMySQL))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3)
@@ -217,12 +369,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
-                            .addComponent(jButton10))
+                            .addComponent(InPerSQLite)
+                            .addComponent(UpPerSQLite))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton8)
-                            .addComponent(jButton11))
+                            .addComponent(SePerSQLite)
+                            .addComponent(dePerSQLite))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton9)
@@ -233,12 +385,12 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton13)
-                            .addComponent(jButton16))
+                            .addComponent(InPerH2DB)
+                            .addComponent(UpPerH2DB))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton14)
-                            .addComponent(jButton17))
+                            .addComponent(SePerH2DB)
+                            .addComponent(dePerH2DB))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton15)
@@ -249,26 +401,81 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void InPerMySQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InPerMySQLMouseClicked
+        insertIntoPersonas(1);
+    }//GEN-LAST:event_InPerMySQLMouseClicked
+
+    private void InPerSQLiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InPerSQLiteMouseClicked
+        insertIntoPersonas(0);
+    }//GEN-LAST:event_InPerSQLiteMouseClicked
+
+    private void InPerH2DBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InPerH2DBMouseClicked
+                insertIntoPersonas(2);
+    }//GEN-LAST:event_InPerH2DBMouseClicked
+
+    private void UpPerMySQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpPerMySQLMouseClicked
+            updatePersonas(1);
+    }//GEN-LAST:event_UpPerMySQLMouseClicked
+
+    private void UpPerSQLiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpPerSQLiteMouseClicked
+        updatePersonas(0);
+    }//GEN-LAST:event_UpPerSQLiteMouseClicked
+
+    private void UpPerH2DBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpPerH2DBMouseClicked
+                updatePersonas(2);
+
+    }//GEN-LAST:event_UpPerH2DBMouseClicked
+
+    private void SePerMySQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SePerMySQLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SePerMySQLActionPerformed
+
+    private void SePerMySQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SePerMySQLMouseClicked
+        selectPersonas(1);
+    }//GEN-LAST:event_SePerMySQLMouseClicked
+
+    private void SePerSQLiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SePerSQLiteMouseClicked
+        selectPersonas(0);
+    }//GEN-LAST:event_SePerSQLiteMouseClicked
+
+    private void SePerH2DBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SePerH2DBMouseClicked
+        selectPersonas(2);
+    }//GEN-LAST:event_SePerH2DBMouseClicked
+
+    private void dePerMySQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dePerMySQLMouseClicked
+        deletePersonas(1);
+    }//GEN-LAST:event_dePerMySQLMouseClicked
+
+    private void dePerSQLiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dePerSQLiteMouseClicked
+        deletePersonas(0);
+    }//GEN-LAST:event_dePerSQLiteMouseClicked
+
+    private void dePerH2DBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dePerH2DBMouseClicked
+        deletePersonas(2);
+    }//GEN-LAST:event_dePerH2DBMouseClicked
+
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton InPerH2DB;
+    private javax.swing.JButton InPerMySQL;
+    private javax.swing.JButton InPerSQLite;
+    private javax.swing.JButton SePerH2DB;
+    private javax.swing.JButton SePerMySQL;
+    private javax.swing.JButton SePerSQLite;
+    private javax.swing.JButton UpPerH2DB;
+    private javax.swing.JButton UpPerMySQL;
+    private javax.swing.JButton UpPerSQLite;
+    private javax.swing.JButton dePerH2DB;
+    private javax.swing.JButton dePerMySQL;
+    private javax.swing.JButton dePerSQLite;
     private javax.swing.JButton generateBtn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
