@@ -74,8 +74,7 @@ public class SQLiteDB {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
     }
-    System.out.println("Created database successfully");
-      
+    System.out.println("Created database successfully");   
   }
   
     /**
@@ -118,10 +117,14 @@ public class SQLiteDB {
       Class.forName("org.sqlite.JDBC");
       c = DriverManager.getConnection("jdbc:sqlite:".concat(dbName).concat(".db"));
       c.setAutoCommit(false);
+      
       System.out.println("Opened database successfully");
       
+      
       stmt = c.createStatement();
+      
       String sql = statement;
+      
       
       stmt.executeUpdate(sql);
 
@@ -141,7 +144,7 @@ public class SQLiteDB {
      * @param dbName Nombre de la base de datos en la cual se va a se va a realizar la operación select.
      * @param statement sentencia SELECT que se va a ejecutar, dada por el usuario.
      */
-  public void select(String dbName, String statement){
+  public ResultSet select(String dbName, String statement){
       Connection c = null;
     Statement stmt = null;
     try {
@@ -152,22 +155,17 @@ public class SQLiteDB {
 
       stmt = c.createStatement();
       ResultSet rs = stmt.executeQuery( statement);
-      while ( rs.next() ) {
-         int id = rs.getInt("CEDULA");
-         String  name = rs.getString("NOMBRE");
       
-         System.out.println( "CEDULA = " + id );
-         System.out.println( "NOMBRE = " + name );
-      
-      }
       rs.close();
       stmt.close();
       c.close();
+      return rs;
+
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);
     }
-    System.out.println("Operation done successfully");
+      return null;
   }
   
   /**
