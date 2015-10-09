@@ -24,10 +24,11 @@ public class MainWindow extends javax.swing.JFrame {
         
         this.jTextArea1.setEditable(false);
         
-        newQuerySQLite = new SQLiteDB();
-        newQueryMySQL = new mySQLDB("TECDB", "root", "root");
-        newQueryH2DB = new H2DB("TECDB", "root", "root");
+        //newQuerySQLite = new SQLiteDB();
+        //newQueryMySQL = new mySQLDB("TECDB", "root", "root");
+        newQueryH2DB = new H2DB("TECDB", "", "");
         newQueryH2DB.execute("CREATE TABLE Personas(Nombre varchar(255),Cedula int primary key)");
+        newQueryH2DB.openServerModeInBrowser("TECDB");
     }
     
     private void insertIntoPersonas (int option){
@@ -40,16 +41,16 @@ public class MainWindow extends javax.swing.JFrame {
             String human2 = human + i;
             cedula+=i;
             if (option == 0) {
-                newQuerySQLite.insertInto("TECDB", "INSERT INTO Personas (Nombre, Cedula)\n" +
-"VALUES ("+human2 +","+Integer.toString(cedula)+");");
+                newQuerySQLite.insertInto("TECDB", "INSERT INTO Personas(Nombre, Cedula) \n" +
+"VALUES('"+human2 +"',"+Integer.toString(cedula)+");");
             } 
             else if (option == 1) {
-                newQueryMySQL.execute("INSERT INTO Personas (Nombre, Cedula)\n" +
-"VALUES ("+human2 +","+Integer.toString(cedula)+");");
+                newQueryMySQL.execute("INSERT INTO Personas(Nombre, Cedula) \n" +
+"VALUES('"+human2 +"',"+Integer.toString(cedula)+");");
             } 
             else {
-                newQueryH2DB.execute("INSERT INTO Personas (Nombre, Cedula)\n" +
-                "VALUES ("+human2 +","+Integer.toString(cedula)+");");
+                newQueryH2DB.execute("INSERT INTO Personas(Nombre, Cedula) \n" +
+                "VALUES('"+human2 +"',"+Integer.toString(cedula)+");");
 
             }
         }
