@@ -3,236 +3,104 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package databasestest;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
  * Clase encargada del manejo y testing del motor de base de datos SQLite.
  *
  * @author Ed
- * @version 
+ * @version 2.0
  */
 public class SQLiteDB {
 
+    private final String DB_DRIVER = "org.sqlite.JDBC";
+    private Connection connection;
+    private Statement stmnt;
 
- // public static void main( String args[] )
-  //{
-     // SQLiteDB mynewDB= new SQLiteDB();
-      //mynewDB.createDB("mydb");
-      /*String sql = "CREATE TABLE PERSONA " +
-                   "(CEDULA INT PRIMARY KEY     NOT NULL," +
-                   " NOMBRE VARCHAR(255) )" ;
-      mynewDB.createTable("mydb", sql);*/
-      
-       /*String sql = "INSERT INTO PERSONA (CEDULA,NOMBRE) " +
-                   "VALUES (601, 'Ariel' );" ;
-      
-      mynewDB.insertInto("mydb", sql);
-      
-       String sql2 = "INSERT INTO PERSONA (CEDULA,NOMBRE) " +
-                   "VALUES (602, 'Edwin' );" ;
-      
-      mynewDB.insertInto("mydb", sql2);
-      
-       String sql3 = "INSERT INTO PERSONA (CEDULA,NOMBRE) " +
-                   "VALUES (603, 'Aaron' );" ;
-      
-      mynewDB.insertInto("mydb", sql3);*/
-      
-      
-   //   mynewDB.select("mydb", "SELECT * FROM PERSONA;");
-      
-      
-      //mynewDB.update("mydb", "UPDATE PERSONA set CEDULA = 2013115139 where NOMBRE='Edwin';");
-      
-     // mynewDB.select("mydb", "SELECT * FROM PERSONA;");
-      
-      //mynewDB.delete("mydb", "DELETE from PERSONA where CEDULA=2013115139;");
-      //mynewDB.select("mydb", "SELECT * FROM PERSONA;");
-      
-      
- // }
-  
-   /**
-     * Permite crear una base de datos SQLite.
-     *
-     * @param dbName Nombre de la base de datos que se va a crear.
-     */
-  
-  public void createDB(String dbName){
-      Connection c = null;
-        Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:".concat(dbName).concat(".db"));
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
-    }
-    System.out.println("Created database successfully");   
-  }
-  
     /**
-     * Permite realizar la sentencia createTable en la base de datos SQLite.
+     * Constructor de los objetos SQLite.
      *
-     * @param dbName Nombre de la base de datos en la cual se va a crear la tabla.
-     * @param statement sentencia CREATE TABLE que se va a ejecutar dada por el usuario.
+     * @param pDBName Nombre de la base de datos.
+     * @param pUser Nombre de usuario.
+     * @param pPass Contrasena de usuario.
      */
-  public void createTable(String dbName, String statement){
-        Connection c = null;
-    Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:".concat(dbName).concat(".db"));
-      System.out.println("Opened database successfully");
-      
-      stmt = c.createStatement();
-      String sql = statement; 
-      stmt.executeUpdate(sql);
-      stmt.close();
-      c.close();
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
+    public SQLiteDB(String pDBName, String pUser, String pPass) {
+        try {
+            String dbConnection = "jdbc:sqlite:" + pDBName + ".db";
+            connection = getDBConnection(dbConnection, pUser, pPass);
+            connection.setAutoCommit(false);
+            stmnt = connection.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("Exception Message: " + ex.getLocalizedMessage());
+        }
     }
-    System.out.println("Table created successfully");
-  }
-  
-   /**
-     * Permite realizar la sentencia insertInto en la base de datos SQLite.
+
+    /**
+     * Permite ejecutar una sentencia SQL.
      *
-     * @param dbName Nombre de la base de datos en la cual se va a se va a insertar el nuevo registro.
-     * @param statement sentencia INSERT INTO que se va a ejecutar dada por el usuario.
+     * @param pSQL Sentencia SQL para ser ejecutada.
      */
-  
-  public void insertInto(String dbName, String statement){
-     Connection c = null;
-    Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:".concat(dbName).concat(".db"));
-      c.setAutoCommit(false);
-      
-      System.out.println("Opened database successfully");
-      
-      
-      stmt = c.createStatement();
-      
-      String sql = statement;
-      
-      
-      stmt.executeUpdate(sql);
-
-      stmt.close();
-      c.commit();
-      c.close();
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
+    public void execute(String pSQL) {
+        try {
+            stmnt.execute(pSQL);
+            connection.commit();
+        } catch (SQLException ex) {
+            System.out.println("Exception Message: " + ex.getLocalizedMessage());
+        }
     }
-    System.out.println("Records created successfully");
-  }
-  
-   /**
-     * Permite realizar la sentencia select en la base de datos SQLite.
+
+    /**
+     * Permite realizar una consulta SQL.
      *
-     * @param dbName Nombre de la base de datos en la cual se va a se va a realizar la operación select.
-     * @param statement sentencia SELECT que se va a ejecutar, dada por el usuario.
+     * @param pSQL Sentencia de la consulta.
+     * @return Retorna un objeto ResultSet con los resultados de la consulta.
+     * @see ResultSet
      */
-  public ResultSet select(String dbName, String statement){
-      Connection c = null;
-    Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:".concat(dbName).concat(".db"));
-      c.setAutoCommit(false);
-      System.out.println("Opened database successfully");
+    public ResultSet executeQuery(String pSQL) {
+        ResultSet outRS = null;
 
-      stmt = c.createStatement();
-      ResultSet rs = stmt.executeQuery( statement);
-      
-      rs.close();
-      stmt.close();
-      c.close();
-      return rs;
+        try {
+            outRS = stmnt.executeQuery(pSQL);
+            connection.commit();
+        } catch (SQLException ex) {
+            System.out.println("Exception Message: " + ex.getLocalizedMessage());
+        }
 
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
+        return outRS;
     }
-      return null;
-  }
-  
-  /**
-     * Permite realizar la sentencia update en la base de datos SQLite.
-     *
-     * @param dbName Nombre de la base de datos en la cual se va a se va a realizar la operación update.
-     * @param statement sentencia UPDATE que se va a ejecutar, dada por el usuario.
-     */
-  
-  public void update (String dBName,String statement){
-      Connection c = null;
-    Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:".concat(dBName).concat(".db"));
-      c.setAutoCommit(false);
-      System.out.println("Opened database successfully");
-
-      stmt = c.createStatement();
-      String sql = statement;
-      stmt.executeUpdate(sql);
-      c.commit();
-
-      stmt.close();
-      c.close();
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
-    }
-    System.out.println("Operation done successfully");
-  }
-  
-   /**
-     * Permite realizar la sentencia delete en la base de datos SQLite.
-     *
-     * @param dbName Nombre de la base de datos en la cual se va a se va a realizar la operación delete.
-     * @param statement sentencia DELETE que se va a ejecutar, dada por el usuario.
-     */
-  public void delete (String dBName,String statement){
-       Connection c = null;
-    Statement stmt = null;
-    try {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:".concat(dBName).concat(".db"));
-      c.setAutoCommit(false);
-      System.out.println("Opened database successfully");
-
-      stmt = c.createStatement();
-      String sql = statement;
-      stmt.executeUpdate(sql);
-      c.commit();
-      
-      
-      stmt.close();
-      c.close();
-    } catch ( Exception e ) {
-      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
-    }
-    System.out.println("Operation done successfully");
-  }
-      
-      
- 
-  
-  
-      
-      
     
+      /**
+     * Cierra la conexion con una base de datos creada.
+     */
+    public void closeSQLiteDB() {
+        try {
+            stmnt.close();
+            connection.commit();
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("Exception Message: " + ex.getLocalizedMessage());
+        }
+    }
+
+    private Connection getDBConnection(String pDBConnection, String pUser, String pPass) {
+        Connection dbConnection = null;
+        try {
+            Class.forName(DB_DRIVER);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            dbConnection = DriverManager.getConnection(pDBConnection, pUser, pPass);
+            return dbConnection;
+        } catch (SQLException ex) {
+            System.out.println("Exception Message: " + ex.getLocalizedMessage());
+        }
+        return dbConnection;
+    } 
 }

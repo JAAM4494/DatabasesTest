@@ -23,72 +23,66 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jSeparator3" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="generateBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTextField1" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="clearBtn" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="selectWhereH2" max="32767" attributes="0"/>
+                          <Component id="SePerMySQL" alignment="0" max="32767" attributes="0"/>
+                          <Component id="InPerMySQL" alignment="0" max="32767" attributes="0"/>
+                          <Component id="selectWheremySQL" alignment="0" max="32767" attributes="0"/>
+                          <Component id="InPerH2DB" alignment="0" max="32767" attributes="0"/>
+                          <Component id="SePerH2DB" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="selectWhere2mySQL" max="32767" attributes="0"/>
+                                  <Component id="dePerMySQL" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="UpPerMySQL" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="UpPerH2DB" max="32767" attributes="0"/>
+                          <Component id="dePerH2DB" alignment="0" max="32767" attributes="0"/>
+                          <Component id="selectWhere2H2" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
                   <Component id="jLabel1" alignment="0" min="-2" pref="287" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="0" min="-2" pref="287" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="SePerH2DB" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="dePerH2DB" min="-2" pref="150" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButton15" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton18" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButton9" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton12" min="-2" pref="150" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="InPerSQLite" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="SePerSQLite" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="selectWhereQLite" max="32767" attributes="0"/>
+                          <Component id="InPerSQLite" alignment="0" max="32767" attributes="0"/>
+                          <Component id="SePerSQLite" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="dePerSQLite" pref="150" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="UpPerSQLite" max="32767" attributes="0"/>
+                          <Component id="dePerSQLite" max="32767" attributes="0"/>
+                          <Component id="selectWhere2QLite" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="SePerMySQL" alignment="1" max="32767" attributes="0"/>
-                          <Component id="InPerMySQL" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton3" alignment="1" max="32767" attributes="0"/>
-                          <Component id="InPerH2DB" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="dePerMySQL" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="UpPerMySQL" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="jButton6" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="UpPerH2DB" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="310" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="labelGrafico" pref="510" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel4" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="generateBtn" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" pref="75" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,20 +90,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="generateBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jScrollPane1" pref="503" max="32767" attributes="0"/>
-                          <Component id="labelGrafico" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -123,8 +105,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectWheremySQL" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectWhere2mySQL" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -142,8 +124,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectWhereQLite" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectWhere2QLite" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -161,12 +143,26 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectWhereH2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectWhere2H2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="generateBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="clearBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -221,21 +217,24 @@
     </Component>
     <Component class="javax.swing.JButton" name="SePerMySQL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="select * Personas"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SePerMySQLMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SePerMySQLActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="selectWheremySQL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton3"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas Where 1"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectWheremySQLMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="UpPerMySQL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="update Personas"/>
+        <Property name="text" type="java.lang.String" value="Update Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UpPerMySQLMouseClicked"/>
@@ -243,16 +242,19 @@
     </Component>
     <Component class="javax.swing.JButton" name="dePerMySQL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="delete Personas"/>
+        <Property name="text" type="java.lang.String" value="Delete Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dePerMySQLMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="selectWhere2mySQL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton6"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas Where 2"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectWhere2mySQLMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -272,20 +274,24 @@
     </Component>
     <Component class="javax.swing.JButton" name="SePerSQLite">
       <Properties>
-        <Property name="text" type="java.lang.String" value="select * Personas"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SePerSQLiteMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton9">
+    <Component class="javax.swing.JButton" name="selectWhereQLite">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton9"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas Where 1"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectWhereQLiteMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectWhereQLiteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="UpPerSQLite">
       <Properties>
-        <Property name="text" type="java.lang.String" value="update Personas"/>
+        <Property name="text" type="java.lang.String" value="Update Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UpPerSQLiteMouseClicked"/>
@@ -293,16 +299,19 @@
     </Component>
     <Component class="javax.swing.JButton" name="dePerSQLite">
       <Properties>
-        <Property name="text" type="java.lang.String" value="delete Personas"/>
+        <Property name="text" type="java.lang.String" value="Delete Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dePerSQLiteMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton12">
+    <Component class="javax.swing.JButton" name="selectWhere2QLite">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton12"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas Where 2"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectWhere2QLiteMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="InPerH2DB">
       <Properties>
@@ -314,20 +323,23 @@
     </Component>
     <Component class="javax.swing.JButton" name="SePerH2DB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="select * Personas"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SePerH2DBMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton15">
+    <Component class="javax.swing.JButton" name="selectWhereH2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton15"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas Where 1"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectWhereH2MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="UpPerH2DB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="update Personas"/>
+        <Property name="text" type="java.lang.String" value="Update Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UpPerH2DBMouseClicked"/>
@@ -335,45 +347,56 @@
     </Component>
     <Component class="javax.swing.JButton" name="dePerH2DB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="delete Personas"/>
+        <Property name="text" type="java.lang.String" value="Delete Personas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dePerH2DBMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton18">
+    <Component class="javax.swing.JButton" name="selectWhere2H2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton18"/>
+        <Property name="text" type="java.lang.String" value="Select * Personas Where 2"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectWhere2H2MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="18" style="3"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Results:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelGrafico">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="18" style="3"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="LabelGrafico"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="generateBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Ubuntu" size="15" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Generate"/>
+        <Property name="text" type="java.lang.String" value="Generate Graph"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="generateBtnMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="clearBtn">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="15" style="3"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Clear Output"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearBtnMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator3">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1000"/>
+        <Property name="toolTipText" type="java.lang.String" value="Iterations Number"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Iterations Number"/>
+      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>
